@@ -166,16 +166,14 @@ section p {
 .show-title {
     background: black;
     color: white;
+    display: flex;
+    justify-content: center;
 }
 .show-title a {
     padding: 1rem;
     display: block;
     color: white;
 }
-.show-title span {
-    float: right;
-}
-
 .show-title a h4 {
     margin: 0;
     display: inline;
