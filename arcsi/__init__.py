@@ -1,3 +1,4 @@
+import logging
 import os
 
 from flask import Flask
@@ -13,6 +14,11 @@ migrate = Migrate()
 def create_app(config_file):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    
+    # set logger and log-handler and log-level so that Gunicorn and Flask share
+    guni_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = guni_logger.handlers
+    app.logger.setLevel(guni_logger.level)
 
     # ensure the instance folder exists
     try:
@@ -40,6 +46,7 @@ def create_app(config_file):
         user_store.find_or_create_role(name='host', description='Show host')
         user_store.find_or_create_role(name='guest', description='Episode guest')
         db.session.commit()
+
 
     from arcsi import api
     from arcsi import view
