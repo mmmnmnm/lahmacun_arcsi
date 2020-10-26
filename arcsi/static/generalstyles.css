@@ -99,6 +99,10 @@ header .admin-menu {
 
 /* Content */
 
+section.content ul {
+    padding-left: 1em;
+}
+
 section.content h2 {
     margin-bottom: 2rem;
 }
@@ -143,6 +147,15 @@ section p {
     align-items: center;
 }
 
+.add-infos > div.description {
+    flex-flow: column;
+    align-items: flex-start;
+}
+
+.add-infos > div.description textarea {
+    width: 350px;
+}
+
 .add-infos > div label {
     margin: 0 0.4rem 0 0;
     font-weight: 500;
@@ -172,6 +185,10 @@ section p {
 .show-title a {
     padding: 1rem;
     display: block;
+    color: #d09cf8;
+}
+.show-title a:hover {
+    text-decoration: none;
     color: white;
 }
 .show-title a h4 {
@@ -179,3 +196,11 @@ section p {
     display: inline;
 }
 
+/* script styles */
+.infos-show {
+    cursor: pointer;
+}
+
+.hidden-infos {
+    display: none;
+}

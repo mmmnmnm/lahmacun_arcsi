@@ -27,8 +27,10 @@
   <input type="number" name="number" id="number" value="{{ item.number }}">
   <label for="name">Episode name</label>
   <input name="name" id="name" value="{{ item.name }}">
-  <label for="description">Episode description</label>
-  <textarea name="description" id="description" value="{{ item.description }}" rows="8"  required></textarea>
+  <div class="description">
+    <label for="description">Episode description</label>
+    <textarea name="description" id="description" value="{{ item.description }}" rows="8"  required></textarea>
+  </div>
   <fieldset>
     <legend>Episode language</legend>
     <label for="music">Music</label>

@@ -15,7 +15,9 @@
         <p>Episode parent show: {% for show in item.shows %} {{ show.name }} {% endfor %}</p>
         <p>Episode number: {{item.number}}</p>
         <p>Episode name: {{item.name}}</p>
-        <p>Episode cover URL: {{item.image_url}}</p>
+        <p>Episode cover URL: 
+            <a href='{{item["image_url"]}}'>Link</a>
+        </p>
         <p>Episode description: {{item.description}}</p>
         <p>Episode language: {{item.language}}</p>
         <p>Episode play date: {{item.play_date}}</p>
@@ -49,36 +51,36 @@
                 <span>with ID: {{show.id}}</span>
             </a>        
         </div>
-        <div class="shows-inner">
-            <p>Show host: {% for user in show.users %} {% if user.name %} {{ user.name }} {% else %} {{ user.email }}
-                {% endif %}{% endfor %}
-            </p>
-            <p>Show active: {{show.active}}</p>
-            <p>Show description: {{show.description}}</p>
-            <p>Show language: {{show.language}}</p>
-            <p>Show cover image: <a href="{{show.cover_image_url}}"></a>Link</p>
-            <p>Show playlist name: {{show.playlist_name}}</p>
-            <p>Show frequency: {{show.frequency}}</p>
-            <p>Show week/day: {{show.week}}/{{show.day}}</p>
-            <p>Show start/end: {{show.start}}/{{show.end}}</p>
-            <p>Show archive lahmastore base URL: {{show.archive_lahmastore_base_url}}</p>
-            <p>Show archive mixcloud: {{show.archive_mixcloud}}</p>
-            <p>Show archive mixcloud base URL: {{show.archive_mixcloud_base_url}}</p>
-            <p><b>Show episodes:</b><br> 
+        <div class="shows-inner">   
+            <h5>Show items: </h5>
                 <ul>
-                {% for item in show["items"] %}
-                <li>
-                    --number: {{item.number}} <br> 
-                    --name: <a
-                        href="{{ url_for('router.view_item', id=item.id) }}">{{item.name}} with ID: {{item.id}}</a>
-                    <br> 
-                    --play_date: {{item.play_date}} <br> 
-                    --description: {{item.description}} <br> 
-                    --archived: {% if item.archived %}archived {% else %}not_archived {% endif %} 
-                </li>
-                {% endfor %} 
-                </ul>    
-            </p>
+                    {% for item in show["items"] %}
+                    <li>
+                    <a href="{{ url_for('router.view_item', id=item.id) }}">
+                        {{item.number}}. <strong>{{item.name}}</strong> – {{item.description}} (Play Date: {{item.play_date}} | ID: {{item.id}}{% if item.archived %} archived {% else %} not_archived {% endif %})
+                    </a>                    
+                    </li>
+                    {% endfor %}
+                </ul> 
+            <h5 class="infos-show">Show infos &raquo;</h5>
+            <div class="hidden-infos">
+                <p>Show host: {% for user in show.users %} {% if user.name %} {{ user.name }} {% else %} {{ user.email }} {% endif %}
+                    {% endfor %}</p>
+                <p>Show active: {{show.active}}</p>
+                <p>Show name: {{show.name}}</p>
+                <p>Show description: {{show.description}}</p>
+                <p>Show language: {{show.language}}</p>
+                <p>Show cover image: <a href="{{show.cover_image_url}}">Link</a></p>
+                <p>Show playlist name: {{show.playlist_name}}</p>
+                <p>Show frequency: {{show.frequency}}</p>
+                <p>Show week: {{show.week}}</p>
+                <p>Show day: {{show.day}}</p>
+                <p>Show start: {{show.start}}</p>
+                <p>Show end: {{show.end}}</p>
+                <p>Show archive lahmastore base URL: {{show.archive_lahmastore_base_url}}</p>
+                <p>Show archive mixcloud: {{show.archive_mixcloud}}</p>
+                <p>Show archive mixcloud base URL: {{show.archive_mixcloud_base_url}}</p>
+            </div>
         </div>
     </div>
     {% endfor %}    
@@ -96,7 +98,13 @@
             <p>User active: {{user.active}}</p>
             <p>User butt username: {{user.butt_user}}</p>
             <p>User butt password: {{user.butt_pw}}</p>
-            <p>User hosted shows: {% for show in user.shows %} {{ show.name }} {% endfor %}</p>
+            <p>User hosted shows: 
+                <ul>
+                {% for show in user.shows %} 
+                <li>{{ show.name }}</li> 
+                {% endfor %}
+                </ul>
+            </p>
             <p>permalink <a href="{{ url_for('router.view_user', id=user.id) }}">{{user.id}}</a></p>    
         </div>
         {% endfor %}    
